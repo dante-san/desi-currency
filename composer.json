@@ -3,32 +3,28 @@
     "description": "A little toolkit that teaches Laravel to count in rupees — because not every app runs on dollars.",
     "type": "library",
     "license": "MIT",
-    "version": "1.0.0",
     "authors": [
         {
             "name": "Laxmidhar Maharana",
-            "email": "papu.team@example.com"
+            "email": "papu.team7@gmail.com"
         }
     ],
     "require": {
-        "php": "^8.0|^8.1|^8.2",
+        "php": "^8.0|^8.1|^8.2|^8.3",
         "illuminate/support": "^9.0|^10.0|^11.0|^12.0"
     },
     "autoload": {
         "psr-4": {
             "Laxmidhar\\DesiCurrency\\": "src/"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
+        }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Laxmidhar\\DesiCurrency\\DesiCurrencyServiceProvider"
+                "Laxmidhar\\DesiCurrency\\CurrencyServiceProvider"
             ],
             "aliases": {
-                "DesiCurrency": "Laxmidhar\\DesiCurrency\\Facades\\DesiCurrency"
+                "Currency": "Laxmidhar\\DesiCurrency\\Facades\\Currency"
             }
         }
     },
@@ -43,11 +39,16 @@
         "helpers",
         "money-format",
         "desi-currency",
-        "desi-money-format"
+        "desi-money-format",
+        "rupee",
+        "lakh",
+        "crore"
     ],
     "homepage": "https://github.com/dante-san/desi-currency",
     "support": {
         "issues": "https://github.com/dante-san/desi-currency/issues",
         "source": "https://github.com/dante-san/desi-currency"
-    }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
