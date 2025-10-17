@@ -10,7 +10,7 @@ class CurrencyService
     /**
      * Format amount in Indian currency format (₹1,23,456.78)
      */
-    public static function format(float $amount, bool $showSymbol = true): string
+    public function format(float $amount, bool $showSymbol = true): string
     {
         $isNegative = $amount < 0;
         $amount = abs($amount);
@@ -43,7 +43,7 @@ class CurrencyService
     /**
      * Format amount in words (1 Lakh, 2.5 Crore, etc.)
      */
-    public static function toWords(float $amount, bool $showSymbol = true): string
+    public function toWords(float $amount, bool $showSymbol = true): string
     {
         $isNegative = $amount < 0;
         $amount = abs($amount);
@@ -77,7 +77,7 @@ class CurrencyService
     /**
      * Format with shorthand notation (1L, 2.5Cr, etc.)
      */
-    public static function toShorthand(float $amount, bool $showSymbol = true): string
+    public function toShorthand(float $amount, bool $showSymbol = true): string
     {
         $isNegative = $amount < 0;
         $amount = abs($amount);
@@ -111,7 +111,7 @@ class CurrencyService
     /**
      * Convert shorthand/words back to number (1L → 100000)
      */
-    public static function parse(string $amount): float
+    public function parse(string $amount): float
     {
         // Remove currency symbol and spaces
         $amount = str_replace(['₹', 'Rs', 'Rs.', ' '], '', $amount);
@@ -148,7 +148,7 @@ class CurrencyService
     /**
      * Format in lakhs only
      */
-    public static function toLakhs(float $amount, int $decimals = 2, bool $showSymbol = true): string
+    public function toLakhs(float $amount, int $decimals = 2, bool $showSymbol = true): string
     {
         $isNegative = $amount < 0;
         $amount = abs($amount);
@@ -168,7 +168,7 @@ class CurrencyService
     /**
      * Format in crores only
      */
-    public static function toCrores(float $amount, int $decimals = 2, bool $showSymbol = true): string
+    public function toCrores(float $amount, int $decimals = 2, bool $showSymbol = true): string
     {
         $isNegative = $amount < 0;
         $amount = abs($amount);
@@ -188,7 +188,7 @@ class CurrencyService
     /**
      * Get rupee symbol
      */
-    public static function symbol(): string
+    public function symbol(): string
     {
         return '₹';
     }
@@ -196,7 +196,7 @@ class CurrencyService
     /**
      * Format amount without decimals
      */
-    public static function formatWhole(float $amount, bool $showSymbol = true): string
+    public function formatWhole(float $amount, bool $showSymbol = true): string
     {
         $isNegative = $amount < 0;
         $amount = abs($amount);
@@ -224,7 +224,7 @@ class CurrencyService
     /**
      * Format for accounting (negative in parentheses)
      */
-    public static function formatAccounting(float $amount, bool $showSymbol = true): string
+    public function formatAccounting(float $amount, bool $showSymbol = true): string
     {
         $isNegative = $amount < 0;
         $formatted = self::format(abs($amount), $showSymbol);
@@ -235,7 +235,7 @@ class CurrencyService
     /**
      * Check if amount is in lakhs range
      */
-    public static function isLakhsRange(float $amount): bool
+    public function isLakhsRange(float $amount): bool
     {
         $abs = abs($amount);
         return $abs >= 100000 && $abs < 10000000;
@@ -244,7 +244,7 @@ class CurrencyService
     /**
      * Check if amount is in crores range
      */
-    public static function isCroresRange(float $amount): bool
+    public function isCroresRange(float $amount): bool
     {
         $abs = abs($amount);
         return $abs >= 10000000;
@@ -253,7 +253,7 @@ class CurrencyService
     /**
      * Format amount with custom suffix
      */
-    public static function formatWithSuffix(float $amount, string $suffix = '', bool $showSymbol = true): string
+    public function formatWithSuffix(float $amount, string $suffix = '', bool $showSymbol = true): string
     {
         $formatted = self::format($amount, $showSymbol);
         return $suffix ? $formatted . ' ' . $suffix : $formatted;
@@ -262,7 +262,7 @@ class CurrencyService
     /**
      * Split amount into rupees and paise
      */
-    public static function splitRupeesPaise(float $amount): array
+    public function splitRupeesPaise(float $amount): array
     {
         $rupees = floor(abs($amount));
         $paise = round((abs($amount) - $rupees) * 100);
@@ -276,7 +276,7 @@ class CurrencyService
     /**
      * Format amount in words (full Indian numbering)
      */
-    public static function toIndianWords(float $amount): string
+    public function toIndianWords(float $amount): string
     {
         $isNegative = $amount < 0;
         $amount = abs($amount);
@@ -299,7 +299,7 @@ class CurrencyService
     /**
      * Helper: Convert number to words
      */
-    private static function numberToWords(int $number): string
+    private function numberToWords(int $number): string
     {
         $ones = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
         $tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
@@ -353,7 +353,7 @@ class CurrencyService
     /**
      * Helper: Convert two digit number to words
      */
-    private static function convertTwoDigit(int $number): string
+    private function convertTwoDigit(int $number): string
     {
         $ones = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
         $tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
@@ -371,7 +371,7 @@ class CurrencyService
     /**
      * Helper: Format decimal values
      */
-    private static function formatDecimal(float $value): string
+    private function formatDecimal(float $value): string
     {
         if (floor($value) == $value) {
             return (string) (int) $value;
