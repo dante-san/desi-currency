@@ -1014,7 +1014,6 @@ If this package helped you, please give it a ⭐️ on [GitHub](https://github.c
 
 Special thanks to:
 - The Laravel community for inspiration
-- Contributors who helped improve this package
 - Indian developers who understand the pain of currency formatting
 
 ---
