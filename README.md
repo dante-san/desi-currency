@@ -91,7 +91,7 @@ class InvoiceController extends Controller
         $invoice = Invoice::find($id);
         $formatted = $this->currency->format($invoice->total);
         $inWords = $this->currency->toIndianWords($invoice->total);
-        
+
         return view('invoice.show', compact('invoice', 'formatted', 'inWords'));
     }
 }
@@ -108,6 +108,7 @@ class InvoiceController extends Controller
 Format amount using Indian numbering system (₹1,23,456.78).
 
 **Parameters:**
+
 - `$amount` - Amount to format
 - `$showSymbol` - Whether to include ₹ symbol (default: true)
 
@@ -131,6 +132,7 @@ Currency::format(-5000);
 ```
 
 **Key Features:**
+
 - Follows Indian comma placement (last 3 digits, then groups of 2)
 - Handles negative amounts
 - Always shows 2 decimal places
@@ -143,6 +145,7 @@ Currency::format(-5000);
 Format amount without decimal places.
 
 **Parameters:**
+
 - `$amount` - Amount to format
 - `$showSymbol` - Whether to include ₹ symbol (default: true)
 
@@ -163,6 +166,7 @@ Currency::formatWhole(1234.56, false);
 ```
 
 **Use Cases:**
+
 - Display whole rupees only
 - Invoice totals
 - Round number displays
@@ -175,6 +179,7 @@ Currency::formatWhole(1234.56, false);
 Format for accounting purposes (negative values in parentheses).
 
 **Parameters:**
+
 - `$amount` - Amount to format
 - `$showSymbol` - Whether to include ₹ symbol (default: true)
 
@@ -192,6 +197,7 @@ Currency::formatAccounting(-25000.50);
 ```
 
 **Use Cases:**
+
 - Financial statements
 - Balance sheets
 - Profit/Loss reports
@@ -206,6 +212,7 @@ Currency::formatAccounting(-25000.50);
 Convert amount to readable words format (Lakh, Crore, K).
 
 **Parameters:**
+
 - `$amount` - Amount to convert
 - `$showSymbol` - Whether to include ₹ symbol (default: true)
 
@@ -238,6 +245,7 @@ Currency::toWords(150000, false);
 ```
 
 **Conversion Logic:**
+
 - ≥ 1 Crore (10,000,000): Shows in Crores
 - ≥ 1 Lakh (100,000): Shows in Lakhs
 - ≥ 1 Thousand (1,000): Shows with K suffix
@@ -250,6 +258,7 @@ Currency::toWords(150000, false);
 Convert to compact shorthand notation (1L, 2.5Cr, 500K).
 
 **Parameters:**
+
 - `$amount` - Amount to convert
 - `$showSymbol` - Whether to include ₹ symbol (default: true)
 
@@ -279,6 +288,7 @@ Currency::toShorthand(-150000);
 ```
 
 **Use Cases:**
+
 - Dashboard widgets
 - Mobile app displays
 - Quick summaries
@@ -292,6 +302,7 @@ Currency::toShorthand(-150000);
 Always format in Lakhs, regardless of amount.
 
 **Parameters:**
+
 - `$amount` - Amount to convert
 - `$decimals` - Number of decimal places (default: 2)
 - `$showSymbol` - Whether to include ₹ symbol (default: true)
@@ -322,6 +333,7 @@ Currency::toLakhs(150000, 2, false);
 ```
 
 **Use Cases:**
+
 - Real estate pricing
 - Salary negotiations
 - Project budgets
@@ -334,6 +346,7 @@ Currency::toLakhs(150000, 2, false);
 Always format in Crores, regardless of amount.
 
 **Parameters:**
+
 - `$amount` - Amount to convert
 - `$decimals` - Number of decimal places (default: 2)
 - `$showSymbol` - Whether to include ₹ symbol (default: true)
@@ -361,6 +374,7 @@ Currency::toCrores(15000000, 2, false);
 ```
 
 **Use Cases:**
+
 - Company valuations
 - Large transactions
 - Annual reports
@@ -374,6 +388,7 @@ Currency::toCrores(15000000, 2, false);
 Convert amount to complete Indian words format.
 
 **Parameters:**
+
 - `$amount` - Amount to convert
 
 **Examples:**
@@ -399,6 +414,7 @@ Currency::toIndianWords(-500);
 ```
 
 **Use Cases:**
+
 - Cheque printing
 - Invoice generation
 - Legal documents
@@ -414,6 +430,7 @@ Currency::toIndianWords(-500);
 Parse Indian currency notation back to numeric value.
 
 **Parameters:**
+
 - `$amount` - String amount to parse
 
 **Examples:**
@@ -451,6 +468,7 @@ Currency::parse('1,50,000');
 ```
 
 **Supported Formats:**
+
 - Shorthand: 1L, 2.5Cr, 500K
 - Words: 1 Lakh, 2.5 Crore
 - With symbols: ₹1L, Rs 2Cr
@@ -458,6 +476,7 @@ Currency::parse('1,50,000');
 - Negative values: -1.5L
 
 **Use Cases:**
+
 - User input parsing
 - Import data processing
 - API integrations
@@ -489,6 +508,7 @@ echo Currency::symbol() . '1,000';
 Split amount into rupees and paise components.
 
 **Parameters:**
+
 - `$amount` - Amount to split
 
 **Examples:**
@@ -513,6 +533,7 @@ echo "Rupees: {$split['rupees']}, Paise: {$split['paise']}";
 ```
 
 **Use Cases:**
+
 - Cheque printing
 - Detailed invoices
 - Payment breakdowns
@@ -525,6 +546,7 @@ echo "Rupees: {$split['rupees']}, Paise: {$split['paise']}";
 Format amount with custom suffix.
 
 **Parameters:**
+
 - `$amount` - Amount to format
 - `$suffix` - Custom suffix text
 - `$showSymbol` - Whether to include ₹ symbol (default: true)
@@ -549,6 +571,7 @@ Currency::formatWithSuffix(1000);
 ```
 
 **Use Cases:**
+
 - Subscription pricing
 - Product pricing
 - EMI displays
@@ -561,6 +584,7 @@ Currency::formatWithSuffix(1000);
 Check if amount is in the Lakhs range (1L to 1Cr).
 
 **Parameters:**
+
 - `$amount` - Amount to check
 
 **Examples:**
@@ -588,6 +612,7 @@ if (Currency::isLakhsRange($amount)) {
 ```
 
 **Use Cases:**
+
 - Conditional formatting
 - Range-based displays
 - Report categorization
@@ -599,6 +624,7 @@ if (Currency::isLakhsRange($amount)) {
 Check if amount is in the Crores range (≥1Cr).
 
 **Parameters:**
+
 - `$amount` - Amount to check
 
 **Examples:**
@@ -623,6 +649,7 @@ if (Currency::isCroresRange($amount)) {
 ```
 
 **Use Cases:**
+
 - Large transaction handling
 - Report filtering
 - Display logic
@@ -777,7 +804,7 @@ $properties = Property::all();
 
 foreach ($properties as $property) {
     $price = $property->price;
-    
+
     // Display appropriate format based on range
     if (Currency::isCroresRange($price)) {
         echo $property->title . ': ' . Currency::toCrores($price);
@@ -819,6 +846,237 @@ foreach ($properties as $property) {
 @else
     <span class="badge">{{ Currency::toLakhs($amount) }}</span>
 @endif
+```
+
+---
+
+## 🎨 Blade Directives
+
+Desi Currency provides convenient Blade directives for use in your Laravel views, making currency formatting clean and readable.
+
+### Quick Reference Table
+
+| Directive                      | Purpose                     | Input Example | Output Example                      |
+| ------------------------------ | --------------------------- | ------------- | ----------------------------------- |
+| `@currency($amount)`           | Standard format with symbol | `123456.78`   | `₹1,23,456.78`                      |
+| `@currencyWhole($amount)`      | Format without decimals     | `123456.78`   | `₹1,23,457`                         |
+| `@currencyPlain($amount)`      | Format without symbol       | `123456.78`   | `1,23,456.78`                       |
+| `@currencyAccounting($amount)` | Accounting format           | `-5000`       | `(₹5,000.00)`                       |
+| `@inLakhs($amount)`            | Always show in Lakhs        | `1500000`     | `₹15.00 Lakhs`                      |
+| `@inCrores($amount)`           | Always show in Crores       | `15000000`    | `₹1.50 Crores`                      |
+| `@currencyShort($amount)`      | Compact notation            | `1500000`     | `₹15L`                              |
+| `@currencyWords($amount)`      | Readable format             | `1500000`     | `₹15 Lakh`                          |
+| `@currencySpell($amount)`      | Full words                  | `123456`      | `One Lakh Twenty Three Thousand...` |
+| `@rupeeSymbol`                 | Rupee symbol only           | -             | `₹`                                 |
+| `@inLakhRange($amount)`        | Check Lakh range            | `500000`      | `true/false`                        |
+| `@inCroreRange($amount)`       | Check Crore range           | `15000000`    | `true/false`                        |
+
+---
+
+### Available Directives
+
+#### Standard Formatting
+
+**@currency($amount)** - Format with Indian numbering and ₹ symbol
+
+```blade
+<h2>Total: @currency($invoice->total)</h2>
+<!-- Output: Total: ₹1,23,456.78 -->
+```
+
+**@currencyWhole($amount)** - Format without decimals
+
+```blade
+<p>Price: @currencyWhole($product->price)</p>
+<!-- Output: Price: ₹1,23,457 -->
+```
+
+**@currencyPlain($amount)** - Format without currency symbol
+
+```blade
+<td>@currencyPlain($amount)</td>
+<!-- Output: 1,23,456.78 -->
+```
+
+**@currencyAccounting($amount)** - Accounting format (negatives in parentheses)
+
+```blade
+<span>Balance: @currencyAccounting($balance)</span>
+<!-- Positive: Balance: ₹5,000.00 -->
+<!-- Negative: Balance: (₹5,000.00) -->
+```
+
+---
+
+#### Indian Units (Lakh & Crore)
+
+**@inLakhs($amount)** - Always display in Lakhs
+
+```blade
+<div class="salary">@inLakhs($package)</div>
+<!-- Output: ₹18.00 Lakhs -->
+```
+
+**@inCrores($amount)** - Always display in Crores
+
+```blade
+<h3>Revenue: @inCrores($revenue)</h3>
+<!-- Output: Revenue: ₹2.50 Crores -->
+```
+
+---
+
+#### Shorthand & Words
+
+**@currencyShort($amount)** - Compact notation (L, Cr, K)
+
+```blade
+<span class="badge">@currencyShort($value)</span>
+<!-- Output: ₹25L or ₹2.5Cr -->
+```
+
+**@currencyWords($amount)** - Readable format (Lakh, Crore)
+
+```blade
+<p>Budget: @currencyWords($budget)</p>
+<!-- Output: Budget: ₹2.5 Crore -->
+```
+
+**@currencySpell($amount)** - Complete Indian words
+
+```blade
+<p>Amount in words: @currencySpell($total)</p>
+<!-- Output: Amount in words: One Lakh Twenty Three Thousand Four Hundred Fifty Six Rupees -->
+```
+
+---
+
+#### Utilities
+
+**@rupeeSymbol** - Just the rupee symbol
+
+```blade
+<span>Price: @rupeeSymbol @currencyPlain($price)</span>
+<!-- Output: Price: ₹ 1,23,456.78 -->
+```
+
+---
+
+### Conditional Directives
+
+Use these to conditionally render based on amount range:
+
+**@inLakhRange($amount)** - Check if amount is in Lakh range (1L - 1Cr)
+
+```blade
+@inLakhRange($property->price)
+    <span class="badge-lakh">@inLakhs($property->price)</span>
+@else
+    <span class="badge">@currency($property->price)</span>
+@endinLakhRange
+```
+
+**@inCroreRange($amount)** - Check if amount is in Crore range (≥1Cr)
+
+```blade
+@inCroreRange($deal->value)
+    <h2 class="premium">@inCrores($deal->value)</h2>
+@endinCroreRange
+```
+
+---
+
+### Practical Blade Examples
+
+#### Product Card
+
+```blade
+<div class="product-card">
+    <h3>{{ $product->name }}</h3>
+
+    @inCroreRange($product->price)
+        <span class="price premium">@inCrores($product->price)</span>
+    @elseInLakhRange($product->price)
+        <span class="price standard">@inLakhs($product->price)</span>
+    @else
+        <span class="price">@currency($product->price)</span>
+    @endinCroreRange
+
+    <small>@currencyShort($product->price)</small>
+</div>
+```
+
+#### Invoice Template
+
+```blade
+<div class="invoice">
+    <table>
+        @foreach($items as $item)
+            <tr>
+                <td>{{ $item->description }}</td>
+                <td class="text-right">@currency($item->amount)</td>
+            </tr>
+        @endforeach
+
+        <tr class="total">
+            <td><strong>Total</strong></td>
+            <td class="text-right"><strong>@currency($invoice->total)</strong></td>
+        </tr>
+    </table>
+
+    <div class="amount-words">
+        <em>@currencySpell($invoice->total)</em>
+    </div>
+</div>
+```
+
+#### Dashboard Widget
+
+```blade
+<div class="stat-card">
+    <h4>Monthly Revenue</h4>
+    <h2>@currencyShort($revenue)</h2>
+    <p class="text-muted">@currencyWords($revenue)</p>
+</div>
+```
+
+#### Financial Report
+
+```blade
+<table class="financial-report">
+    <tr>
+        <td>Revenue</td>
+        <td>@currencyAccounting($revenue)</td>
+    </tr>
+    <tr>
+        <td>Expenses</td>
+        <td>@currencyAccounting(-$expenses)</td>
+    </tr>
+    <tr>
+        <td>Profit/Loss</td>
+        <td><strong>@currencyAccounting($profit)</strong></td>
+    </tr>
+</table>
+```
+
+#### Salary Package Display
+
+```blade
+<div class="salary-breakdown">
+    <div class="annual">
+        <label>Annual Package:</label>
+        <h3>@inLakhs($salary->annual)</h3>
+    </div>
+
+    <div class="monthly">
+        <label>Monthly:</label>
+        <p>@currency($salary->monthly)</p>
+    </div>
+
+    <div class="compact">
+        <small>(@currencyShort($salary->annual) per year)</small>
+    </div>
+</div>
 ```
 
 ---
@@ -944,14 +1202,14 @@ test('converts to Indian words', function () {
 
 ## 📊 Comparison with Other Solutions
 
-| Feature | Desi Currency | Manual Formatting | Other Packages |
-|---------|--------------|-------------------|----------------|
-| Indian Numbering | ✅ | ❌ | ⚠️ Limited |
-| Lakh/Crore Support | ✅ | ❌ | ❌ |
-| Shorthand Parsing | ✅ | ❌ | ❌ |
-| Words Conversion | ✅ | ❌ | ⚠️ English only |
-| Zero Config | ✅ | N/A | ❌ |
-| Laravel Integration | ✅ | N/A | ⚠️ Limited |
+| Feature             | Desi Currency | Manual Formatting | Other Packages  |
+| ------------------- | ------------- | ----------------- | --------------- |
+| Indian Numbering    | ✅            | ❌                | ⚠️ Limited      |
+| Lakh/Crore Support  | ✅            | ❌                | ❌              |
+| Shorthand Parsing   | ✅            | ❌                | ❌              |
+| Words Conversion    | ✅            | ❌                | ⚠️ English only |
+| Zero Config         | ✅            | N/A               | ❌              |
+| Laravel Integration | ✅            | N/A               | ⚠️ Limited      |
 
 ---
 
@@ -1013,6 +1271,7 @@ If this package helped you, please give it a ⭐️ on [GitHub](https://github.c
 ## 🙏 Acknowledgments
 
 Special thanks to:
+
 - The Laravel community for inspiration
 - Indian developers who understand the pain of currency formatting
 

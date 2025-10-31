@@ -29,63 +29,57 @@ class CurrencyServiceProvider extends ServiceProvider
      */
     protected function registerBladeDirectives(): void
     {
-        // Basic: @rupee(123456) → ₹1,23,456.78
-        Blade::directive('rupee', function ($expression) {
-            return "<?php echo app('currency')->format($expression); ?>";
+        // Format Directives - Standard formatting with symbol
+        Blade::directive('currency', function ($expression) {
+            return "<?php echo app('desi-currency')->format($expression); ?>";
         });
 
-        // Short form: @rs(123456) → ₹1,23,456.78
-        Blade::directive('rs', function ($expression) {
-            return "<?php echo app('currency')->format($expression); ?>";
+        Blade::directive('currencyWhole', function ($expression) {
+            return "<?php echo app('desi-currency')->formatWhole($expression); ?>";
         });
 
-        // No symbol: @amount(123456) → 1,23,456.78
-        Blade::directive('amount', function ($expression) {
-            return "<?php echo app('currency')->format($expression, false); ?>";
+        Blade::directive('currencyPlain', function ($expression) {
+            return "<?php echo app('desi-currency')->format($expression, false); ?>";
         });
 
-        // Lakhs: @lakh(500000) → ₹5.00 Lakhs
-        Blade::directive('lakh', function ($expression) {
-            return "<?php echo app('currency')->toLakhs($expression); ?>";
+        Blade::directive('currencyAccounting', function ($expression) {
+            return "<?php echo app('desi-currency')->formatAccounting($expression); ?>";
         });
 
-        // Crores: @crore(10000000) → ₹1.00 Crores
-        Blade::directive('crore', function ($expression) {
-            return "<?php echo app('currency')->toCrores($expression); ?>";
+        // Indian Unit Directives - Lakh & Crore
+        Blade::directive('inLakhs', function ($expression) {
+            return "<?php echo app('desi-currency')->toLakhs($expression); ?>";
         });
 
-        // Short: @short(1500000) → ₹15L
-        Blade::directive('short', function ($expression) {
-            return "<?php echo app('currency')->toShorthand($expression); ?>";
+        Blade::directive('inCrores', function ($expression) {
+            return "<?php echo app('desi-currency')->toCrores($expression); ?>";
         });
 
-        // Word: @word(1500000) → ₹15 Lakh
-        Blade::directive('word', function ($expression) {
-            return "<?php echo app('currency')->toWords($expression); ?>";
+        // Shorthand & Words Directives
+        Blade::directive('currencyShort', function ($expression) {
+            return "<?php echo app('desi-currency')->toShorthand($expression); ?>";
         });
 
-        // Spell: @spell(12345.67) → Twelve Thousand Three Hundred...
-        Blade::directive('spell', function ($expression) {
-            return "<?php echo app('currency')->toIndianWords($expression); ?>";
+        Blade::directive('currencyWords', function ($expression) {
+            return "<?php echo app('desi-currency')->toWords($expression); ?>";
         });
 
-        // Round: @round(123456.78) → ₹1,23,457
-        Blade::directive('round', function ($expression) {
-            return "<?php echo app('currency')->formatWhole($expression); ?>";
+        Blade::directive('currencySpell', function ($expression) {
+            return "<?php echo app('desi-currency')->toIndianWords($expression); ?>";
         });
 
-        // Just symbol: ₹
-        Blade::directive('currency', function () {
-            return "<?php echo app('currency')->symbol(); ?>";
+        // Utility Directives
+        Blade::directive('rupeeSymbol', function () {
+            return "<?php echo app('desi-currency')->symbol(); ?>";
         });
 
-        // Conditionals
-        Blade::if('lakh', function ($amount) {
-            return app('currency')->isLakhsRange($amount);
+        // Conditional Directives
+        Blade::if('inLakhRange', function ($amount) {
+            return app('desi-currency')->isLakhsRange($amount);
         });
 
-        Blade::if('crore', function ($amount) {
-            return app('currency')->isCroresRange($amount);
+        Blade::if('inCroreRange', function ($amount) {
+            return app('desi-currency')->isCroresRange($amount);
         });
     }
 }
