@@ -1287,12 +1287,17 @@ Special thanks to:
 
 ## 🗺️ Roadmap
 
+### ✅ Completed
+
+- [x] Blade directives for formatting
+
+### 🔜 Upcoming
+
 - [ ] Add support for other Indian regional formats
 - [ ] Currency conversion support
 - [ ] GST calculations
 - [ ] Tax computation helpers
 - [ ] Multi-currency support
-- [ ] Blade directives for formatting
 
 ---
 
